@@ -1,0 +1,30 @@
+#postgres db
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  containers:
+    - name: postgres
+      image: postgres:14
+      env:
+        - name: POSTGRES_USER
+          value: scdf
+        - name: POSTGRES_PASSWORD
+          value: scdfpass
+        - name: POSTGRES_DB
+          value: dataflow
+---
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432

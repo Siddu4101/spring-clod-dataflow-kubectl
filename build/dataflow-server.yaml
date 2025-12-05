@@ -1,0 +1,41 @@
+#server
+apiVersion: v1
+kind: Pod
+metadata:
+  name: scdf-server
+  labels:
+    app: scdf
+spec:
+  containers:
+    - name: scdf-server
+      image: springcloud/spring-cloud-dataflow-server:2.11.5
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://postgres:5432/dataflow
+        - name: SPRING_DATASOURCE_USERNAME
+          value: scdf
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: scdfpass
+        - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+          value: org.postgresql.Driver
+        - name: SPRING_CLOUD_DATAFLOW_FEATURES_SKIPPER_ENABLED
+          value: "false"
+        - name: SPRING_CLOUD_KUBERNETES_CONFIG_ENABLED
+          value: "false"  
+        - name: SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED
+          value: "false"
+
+---
+# Service 
+apiVersion: v1
+kind: Service
+metadata:
+  name: scdf-server
+spec:
+  selector:
+    app: scdf
+  ports:
+    - name: http
+      port: 9393
+      targetPort: 9393
+  type: NodePort
