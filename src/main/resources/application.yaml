@@ -1,16 +1,15 @@
 spring:
+  batch:
+    jdbc:
+      table-prefix: BOOT3_BATCH_
+      initialize-schema: ALWAYS
   application:
     name: demo
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: sa
-    password:
-
+    url: jdbc:postgresql://127.0.0.1:58831/dataflow # post changes after each service expose as i am using the minikube service instead of port fwd
+    username: scdf
+    password: scdfpass
   jpa:
     hibernate:
       ddl-auto: update
-    .show-sql: true
-  h2:
-    console:
-      enabled: true
-      path: /console
+    show-sql: true

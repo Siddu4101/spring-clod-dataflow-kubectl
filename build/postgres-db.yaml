@@ -16,6 +16,9 @@ spec:
           value: scdfpass
         - name: POSTGRES_DB
           value: dataflow
+        - name: TZ
+          value: Asia/Kolkata
+
 ---
 # service
 apiVersion: v1
@@ -23,6 +26,7 @@ kind: Service
 metadata:
   name: postgres
 spec:
+  type: NodePort
   selector:
     app: postgres
   ports:

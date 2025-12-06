@@ -24,6 +24,19 @@ spec:
           value: "false"  
         - name: SPRING_CLOUD_DATAFLOW_FEATURES_STREAMS_ENABLED
           value: "false"
+        - name: SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_SCHEDULER_KUBERNETES_ENABLED
+          value: "true"
+      volumeMounts:
+        - name: batch-jars
+          mountPath: /batches/batch-jars   # path inside the container
+  
+  volumes:
+    - name: batch-jars
+      hostPath:
+        path: /sid/batches
+        type: DirectoryOrCreate 
 
 ---
 # Service 
