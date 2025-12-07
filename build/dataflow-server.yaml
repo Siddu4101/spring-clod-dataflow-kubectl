@@ -28,6 +28,12 @@ spec:
           value: "true"
         - name: SPRING_CLOUD_SCHEDULER_KUBERNETES_ENABLED
           value: "true"
+        - name: SPRING_CLOUD_DATAFLOW_TASK_PLATFORM_KUBERNETES_ENABLED
+          value: "true"
+        - name: SPRING_CLOUD_DATAFLOW_TASK_PLATFORM_KUBERNETES_ACCOUNTS_DEFAULT_NAMESPACE
+          value: default
+        - name: SPRING_CLOUD_DATAFLOW_TASK_PLATFORM_KUBERNETES_ACCOUNTS_DEFAULT_CONTAINER_IMAGE_PULL_POLICY
+          value: IfNotPresent
       volumeMounts:
         - name: batch-jars
           mountPath: /batches/batch-jars   # path inside the container
